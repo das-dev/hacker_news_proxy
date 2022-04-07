@@ -4,7 +4,7 @@ from urllib.parse import urljoin
 import httpx
 from aiohttp import web, hdrs
 
-from content_handler import patch_html
+from content_handler import HTMLHandler
 
 
 class HackerNewsProxy:
@@ -31,6 +31,6 @@ class HackerNewsProxy:
         origin_content = origin_response.content
         origin_content_type = origin_response.headers.get(hdrs.CONTENT_TYPE)
         if mimetypes.types_map.get('.html', '') in origin_content_type:
-            origin_content = patch_html(origin_content.decode('utf8'))
+            origin_content = HTMLHandler(origin_content).handle()
         headers = {hdrs.CONTENT_TYPE: origin_content_type}
         return web.Response(body=origin_content, headers=headers)
