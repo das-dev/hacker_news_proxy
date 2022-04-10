@@ -1,10 +1,11 @@
 Практические задачки группы Python-04 
 =======
 
-### Build docker container:
+## Описание
+Прокси сервер, модифицирующий текст на страницах сайта Hacker News следующим образом: после каждого слова из шести букв добавляет значок «™».
 
-`docker build -t proxy .`
-
-### Run docker container:
-
-`docker run -p 80:8080 -it proxy`
+## Запуск сервера:
+```
+docker build -t proxy .
+docker run -p 80:8080 -it proxy
+```
