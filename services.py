@@ -1,7 +1,7 @@
 import re
 import lxml.html
 
-LOCALHOST = 'https://127.0.0.1:8080/'
+LOCALHOST = 'https://127.0.0.1/'
 TOKEN_LENGTH_TO_PATCH = 6
 RE_TARGET_TOKEN = fr'\b(?P<word>\w{{{TOKEN_LENGTH_TO_PATCH}}})\b'
 RE_REPLACE = r'\g<word>™'

@@ -5,7 +5,12 @@
 Прокси сервер, модифицирующий текст на страницах сайта Hacker News следующим образом: после каждого слова из шести букв добавляет значок «™».
 
 ## Запуск сервера:
-```
+```bash
 docker build -t proxy .
-docker run -p 80:8080 -it proxy
+docker run -p 80:80 -it proxy
+```
+
+## Запуск тестов
+```bash
+docker run -p 80:80 -it proxy pytest
 ```
