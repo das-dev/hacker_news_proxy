@@ -2,17 +2,17 @@
 FROM python:latest
 
 # set work directory
-WORKDIR /usr/src/app
+WORKDIR /app
+COPY . .
 
 # set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV PATH="${PATH}:/root/.local/bin"
 
 # install dependencies
-RUN pip install --upgrade pip
-COPY ./requirements.txt .
-RUN pip install -r requirements.txt
+RUN curl -sSL https://install.python-poetry.org | python - \
+    && poetry update \
+    && poetry install
 
-# copy project
-COPY . .
-CMD [ "python", "./run.py" ]
+CMD [ "poetry", "run", "python", "app.py" ]
