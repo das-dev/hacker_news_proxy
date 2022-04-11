@@ -5,11 +5,10 @@ from aiohttp import web, hdrs, ClientSession
 from multidict import MultiDict
 
 from services import patch_html
+from settings import HACKER_NEWS_HOST
 
 
 class HackerNewsProxy(web.View):
-    HACKER_NEWS_HOST = 'https://news.ycombinator.com/'
-
     async def get(self) -> web.Response:
         async with ClientSession() as session:
             async with session.get(self._make_url(),
@@ -28,11 +27,11 @@ class HackerNewsProxy(web.View):
         return self._make_response(origin_content, origin_content_type)
 
     def _make_url(self) -> str:
-        return urljoin(self.HACKER_NEWS_HOST, self.request.path_qs)
+        return urljoin(HACKER_NEWS_HOST, self.request.path_qs)
 
     @classmethod
     def _make_response(cls, content: bytes, content_type: str) -> web.Response:
         if mimetypes.types_map.get('.html', '') in content_type:
-            content = patch_html(content, cls.HACKER_NEWS_HOST)
+            content = patch_html(content, HACKER_NEWS_HOST)
         headers = MultiDict({hdrs.CONTENT_TYPE: content_type})
         return web.Response(body=content, headers=headers)

@@ -1,8 +1,8 @@
 from urllib.parse import urljoin
 
-from services import patch_html, LOCALHOST
+from services import patch_html
+from settings import PROXY_HOST, HACKER_NEWS_HOST
 
-HACKER_NEWS_HOST = 'https://news.ycombinator.com/'
 TM_HTML_ENTITY = '&#8482;'
 
 
@@ -12,7 +12,7 @@ def _ascii(unicode):
 
 def test_link_replace():
     source_url = urljoin(HACKER_NEWS_HOST, '/about')
-    target_url = urljoin(LOCALHOST, '/about')
+    target_url = urljoin(PROXY_HOST, '/about')
     html_source = _ascii(f'<head></head><a href="{source_url}">Anchor</a>')
     target = _ascii(f'a href="{target_url}">Anchor{TM_HTML_ENTITY}</a>')
     assert target in patch_html(html_source, HACKER_NEWS_HOST)
