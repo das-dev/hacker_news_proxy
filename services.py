@@ -7,8 +7,8 @@ RE_TARGET_TOKEN = fr'\b(?P<word>\w{{{TOKEN_LENGTH_TO_PATCH}}})\b'
 RE_REPLACE = r'\g<word>™'
 
 
-def patch_html(content: bin, origin_host: str) -> bin:
-    tree = lxml.html.fromstring(content.decode('utf8'))
+def patch_html(content: bytes, origin_host: str) -> bytes:
+    tree: lxml.html.HtmlElement = lxml.html.fromstring(content.decode('utf8'))
     _patch_text(tree.head.find('title'))
     for node in tree.body.iterdescendants():
         _patch_text(node)
