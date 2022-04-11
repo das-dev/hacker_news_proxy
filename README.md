@@ -15,7 +15,7 @@ docker run -it --rm proxy poetry run pytest
 ```
 ### Запустить статический анализ:
 ```bash
-docker run -it --rm proxy poetry run mypy app.py
+docker run -it --rm proxy poetry run mypy .
 ```
 ### Запустить сервер:
 ```bash
@@ -35,7 +35,7 @@ poetry run pytest
 ```
 ### Запустить статический анализ:
 ```bash
-poetry run mypy app.py
+poetry run mypy .
 ```
 ### Запустить сервер:
 ```bash
